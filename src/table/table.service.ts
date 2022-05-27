@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { CreateTableDto } from './dto/create-table.dto';
 import { Table } from './entities/table.entity';
 import { PrismaService } from '../prisma/prisma.service';
+import { UpdateTableDto } from './dto/update-table.tdo';
 
 @Injectable()
 export class TableService {
@@ -19,6 +20,15 @@ export class TableService {
     const data: Table = { ...dto };
 
     return this.prisma.table.create({
+      data,
+    });
+  }
+
+  update(id: string, dto: UpdateTableDto): Promise<Table> {
+    const data: Partial<Table> = { ...dto };
+
+    return this.prisma.table.update({
+      where: { id },
       data,
     });
   }
