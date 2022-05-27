@@ -12,6 +12,12 @@ import { UpdateTableDto } from './dto/update-table.tdo';
 export class TableService {
   constructor(private readonly prisma: PrismaService) {}
 
+  create(dto: CreateTableDto): Promise<Table> {
+    const data: Table = { ...dto };
+
+    return this.prisma.table.create({ data }).catch(this.handleError);
+  }
+
   findAll(): Promise<Table[]> {
     return this.prisma.table.findMany();
   }
@@ -28,12 +34,6 @@ export class TableService {
 
   async findOne(id: string): Promise<Table> {
     return await this.findById(id);
-  }
-
-  create(dto: CreateTableDto): Promise<Table> {
-    const data: Table = { ...dto };
-
-    return this.prisma.table.create({ data }).catch(this.handleError);
   }
 
   async update(id: string, dto: UpdateTableDto): Promise<Table> {

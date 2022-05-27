@@ -20,6 +20,14 @@ import { UpdateTableDto } from './dto/update-table.tdo';
 export class TableController {
   constructor(private tableService: TableService) {}
 
+  @Post()
+  @ApiOperation({
+    summary: 'Criar nova mesa.',
+  })
+  create(@Body() dto: CreateTableDto): Promise<Table> {
+    return this.tableService.create(dto);
+  }
+
   @Get()
   @ApiOperation({
     summary: 'Listar todas as mesas.',
@@ -30,23 +38,15 @@ export class TableController {
 
   @Get(':id')
   @ApiOperation({
-    summary: 'Visualizar uma mesa.',
+    summary: 'Visualizar uma mesa pelo ID.',
   })
   findOne(@Param('id') id: string): Promise<Table> {
     return this.tableService.findOne(id);
   }
 
-  @Post()
-  @ApiOperation({
-    summary: 'Criar nova mesa.',
-  })
-  create(@Body() dto: CreateTableDto): Promise<Table> {
-    return this.tableService.create(dto);
-  }
-
   @Patch(':id')
   @ApiOperation({
-    summary: 'Editar uma mesa pelo id.',
+    summary: 'Editar uma mesa pelo ID.',
   })
   update(@Param('id') id: string, @Body() dto: UpdateTableDto): Promise<Table> {
     return this.tableService.update(id, dto);
