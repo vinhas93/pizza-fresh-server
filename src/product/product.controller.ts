@@ -24,7 +24,7 @@ export class ProductController {
   @ApiOperation({
     summary: 'Criar um novo Produto.',
   })
-  create(@Body() dto: CreateProductDto): Promise<Product> {
+  create(@Body() dto: CreateProductDto) {
     return this.productService.create(dto);
   }
 
@@ -32,7 +32,7 @@ export class ProductController {
   @ApiOperation({
     summary: 'Listar todos os produtos.',
   })
-  findAll(): Promise<Product[]> {
+  findAll() {
     return this.productService.findAll();
   }
 
@@ -40,7 +40,7 @@ export class ProductController {
   @ApiOperation({
     summary: 'Visualizar um produto pelo ID.',
   })
-  findOne(@Param('id') id: string): Promise<Product> {
+  findOne(@Param('id') id: string) {
     return this.productService.findOne(id);
   }
 
