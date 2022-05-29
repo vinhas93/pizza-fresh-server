@@ -1,4 +1,5 @@
 import {
+  HttpException,
   Injectable,
   NotFoundException,
   UnprocessableEntityException,
@@ -22,16 +23,6 @@ export class TableService {
     return this.prisma.table.findMany();
   }
 
-  async findById(id: string): Promise<Table> {
-    const record = await this.prisma.table.findUnique({ where: { id } });
-
-    if (!record) {
-      throw new NotFoundException(`Registro com o Id '${id}' não encontrado. `);
-    }
-
-    return record;
-  }
-
   async findOne(id: string): Promise<Table> {
     return await this.findById(id);
   }
@@ -51,10 +42,18 @@ export class TableService {
 
   async delete(id: string) {
     await this.findById(id);
+    await this.prisma.table.delete({ where: { id } });
+    throw new HttpException('', 204);
+  }
 
-    await this.prisma.table.delete({
-      where: { id },
-    });
+  async findById(id: string): Promise<Table> {
+    const record = await this.prisma.table.findUnique({ where: { id } });
+
+    if (!record) {
+      throw new NotFoundException(`Registro com o Id '${id}' não encontrado. `);
+    }
+
+    return record;
   }
 
   handleError(error: Error): undefined {
