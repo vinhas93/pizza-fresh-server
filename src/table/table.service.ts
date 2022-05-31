@@ -1,8 +1,8 @@
 import {
+  BadRequestException,
   HttpException,
   Injectable,
   NotFoundException,
-  UnprocessableEntityException,
 } from '@nestjs/common';
 import { CreateTableDto } from './dto/create-table.dto';
 import { Table } from './entities/table.entity';
@@ -59,7 +59,7 @@ export class TableService {
   handleError(error: Error): undefined {
     const errorLines = error.message?.split('/n');
     const lastErrorLine = errorLines[errorLines.length - 1].trim();
-    throw new UnprocessableEntityException(
+    throw new BadRequestException(
       lastErrorLine || 'Algum erro ocorreu ao executar a operação.',
     );
   }
