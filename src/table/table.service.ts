@@ -57,7 +57,7 @@ export class TableService {
   }
 
   handleError(error: Error): undefined {
-    const errorLines = error.message?.split('/n');
+    const errorLines = error.message?.split('\n');
     const lastErrorLine = errorLines[errorLines.length - 1].trim();
     throw new BadRequestException(
       lastErrorLine || 'Algum erro ocorreu ao executar a operação.',
