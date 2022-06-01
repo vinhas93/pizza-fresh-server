@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsInt, IsPositive, IsString, IsUUID } from 'class-validator';
+import { IsInt, IsPositive, IsUUID } from 'class-validator';
 
 export class CreateOrderDto {
   @IsUUID()
