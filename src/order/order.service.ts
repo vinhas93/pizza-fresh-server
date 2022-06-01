@@ -1,12 +1,27 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateOrderDto } from './dto/create-order.dto';
+import { handleError } from '../utils/handle-error.util';
+import { Prisma } from '@prisma/client';
 
 @Injectable()
 export class OrderService {
   constructor(private readonly prisma: PrismaService) {}
+
   create(dto: CreateOrderDto) {
-    return 'This action adds a new order';
+    const data: Prisma.OrderCreateInput = {
+      user: {
+        connect: {
+          id: dto.userId,
+        },
+      },
+      table: {
+        connect: {
+          number: dto.tableNumber,
+        },
+      },
+    };
+    return this.prisma.order.create({ data }).catch(handleError);
   }
 
   findAll() {
