@@ -3,17 +3,15 @@ import {
   Controller,
   Delete,
   Get,
-  HttpCode,
-  HttpStatus,
   Param,
   Patch,
   Post,
 } from '@nestjs/common';
-import { TableService } from './table.service';
-import { CreateTableDto } from './dto/create-table.dto';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
-import { Table } from './entities/table.entity';
+import { CreateTableDto } from './dto/create-table.dto';
 import { UpdateTableDto } from './dto/update-table.tdo';
+import { Table } from './entities/table.entity';
+import { TableService } from './table.service';
 
 @ApiTags('table')
 @Controller('table')

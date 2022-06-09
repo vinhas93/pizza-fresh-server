@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from '../prisma/prisma.service';
-import { CreateOrderDto } from './dto/create-order.dto';
-import { handleError } from '../utils/handle-error.util';
 import { Prisma } from '@prisma/client';
+import { PrismaService } from '../prisma/prisma.service';
+import { handleError } from '../utils/handle-error.util';
+import { CreateOrderDto } from './dto/create-order.dto';
 
 @Injectable()
 export class OrderService {
