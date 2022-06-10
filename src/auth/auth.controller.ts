@@ -12,6 +12,8 @@ import { AuthService } from './auth.service';
 import { LoginDto } from './dto/login.dto';
 import { LoginResponseDto } from './dto/login-response.dto';
 import { AuthGuard } from '@nestjs/passport';
+import { User } from '@prisma/client';
+import { LoggedUser } from './logged-user.decorator';
 
 @Controller('auth')
 @ApiTags('auth')
@@ -30,10 +32,10 @@ export class AuthController {
   @Get()
   @UseGuards(AuthGuard())
   @ApiOperation({
-    summary: 'Retornar o usuário logado no momento.',
+    summary: 'Retorna o usuário autenticado no momento',
   })
   @ApiBearerAuth()
-  profile() {
-    return { message: 'Autenticação bem sucedida' };
+  profile(@LoggedUser() user: User) {
+    return user;
   }
 }
